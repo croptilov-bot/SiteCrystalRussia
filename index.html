@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRYSTAL RUSSIA | Официальный портал</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* ===== СБРОС И БАЗА ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #08080f;
+            color: #eaeef2;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0b14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f7931e;
+            border-radius: 12px;
+        }
+
+        /* ===== АНИМАЦИИ ===== */
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(32px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes glowPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 12px rgba(247, 147, 30, 0.15);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(247, 147, 30, 0.30);
+            }
+        }
+        @keyframes floatSoft {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .anim-up {
+            animation: fadeSlideUp 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+        .anim-float {
+            animation: floatSoft 3s ease-in-out infinite;
+        }
+        .anim-glow {
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        /* ===== ХЕДЕР ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(8, 8, 15, 0.78);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 10px 0;
+            transition: 0.25s;
+        }
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: -0.5px;
+        }
+        .logo i {
+            color: #f7931e;
+            font-size: 28px;
+        }
+        .logo span {
+            background: linear-gradient(135deg, #f7f9fc, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.45);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .nav a:hover,
+        .nav a.active {
+            color: #fff;
+            background: rgba(247, 147, 30, 0.08);
+        }
+        .nav a.active {
+            color: #f7931e;
+        }
+        .header .btn-download {
+            background: linear-gradient(145deg, #f7931e, #d97a0e);
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .header .btn-download:hover {
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0 8px 28px rgba(247, 147, 30, 0.35);
+        }
+
+        /* ===== НАВИГАЦИОННОЕ ОКНО ===== */
+        .nav-window {
+            margin-top: 76px;
+            padding: 36px 0 28px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(247, 147, 30, 0.04), transparent 70%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        .nav-window .label {
+            text-align: center;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .nav-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 16px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .nav-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: #f7931e;
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+        }
+        .nav-card .icon {
+            font-size: 26px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .nav-card .title {
+            font-weight: 700;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .nav-card .desc {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.2);
+            margin-top: 2px;
+        }
+        .nav-card .arrow {
+            display: inline-block;
+            transition: 0.3s;
+            margin-left: 4px;
+        }
+        .nav-card:hover .arrow {
+            transform: translateX(6px);
+        }
+
+        /* ===== РАЗДЕЛЫ ===== */
+        .section {
+            padding: 56px 0 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            scroll-margin-top: 80px;
+        }
+        .section:last-of-type {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #fff, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-sub {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.25);
+            margin-bottom: 28px;
+        }
+        .card-wrap {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 28px 30px;
+            transition: 0.3s;
+        }
+        .card-wrap:hover {
+            border-color: rgba(247, 147, 30, 0.08);
+        }
+
+        /* ===== СКАЧИВАНИЕ ===== */
+        .download-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+        .download-info h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f7931e;
+            margin-bottom: 8px;
+        }
+        .download-info p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+        .download-info ul {
+            list-style: none;
+            margin-bottom: 18px;
+        }
+        .download-info ul li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 4px 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        .download-info ul li i {
+            color: #4caf50;
+            font-size: 16px;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: linear-gradient(145deg, #f7931e, #d97a0e);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 0 0 rgba(247, 147, 30, 0);
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(247, 147, 30, 0.35);
+        }
+        .btn-primary i {
+            font-size: 18px;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-secondary:hover {
+            border-color: #f7931e;
+            background: rgba(247, 147, 30, 0.04);
+        }
+
+        .download-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 26px 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .download-card:hover {
+            border-color: rgba(247, 147, 30, 0.15);
+            transform: translateY(-4px);
+        }
+        .download-card .version {
+            background: rgba(76, 175, 80, 0.08);
+            color: #4caf50;
+            font-size: 12px;
+            padding: 2px 14px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+        .download-card .big-icon {
+            font-size: 52px;
+            margin: 10px 0 4px;
+        }
+        .download-card .meta {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.2);
+            margin-top: 6px;
+        }
+        .download-card .tags {
+            margin-top: 14px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .download-card .tags span {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 11px;
+        }
+
+        /* ===== СЕТКИ ===== */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 22px 20px;
+            transition: 0.3s;
+        }
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.025);
+            border-color: rgba(247, 147, 30, 0.08);
+            transform: translateY(-4px);
+        }
+        .info-card .ic {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .info-card h4 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #f7931e;
+        }
+        .info-card p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.6;
+        }
+
+        /* ===== КОМАНДА ===== */
+        .team-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 20px 14px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .team-card:hover {
+            background: rgba(255, 255, 255, 0.025);
+            border-color: rgba(247, 147, 30, 0.08);
+            transform: translateY(-4px);
+        }
+        .team-card .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #f7931e, #b8620a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0 auto 8px;
+            color: #fff;
+        }
+        .team-card .name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .team-card .role {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* ===== ПРЕИМУЩЕСТВА ===== */
+        .feature-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 22px 16px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.025);
+            border-color: rgba(247, 147, 30, 0.08);
+            transform: translateY(-4px);
+        }
+        .feature-card .ic {
+            font-size: 34px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .feature-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .feature-card p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ЗАГРУЗКИ ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal {
+            background: #12121e;
+            border: 1px solid rgba(247, 147, 30, 0.2);
+            border-radius: 24px;
+            padding: 40px 36px;
+            max-width: 460px;
+            width: 90%;
+            text-align: center;
+            animation: fadeSlideUp 0.4s ease;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
+        }
+        .modal .icon-big {
+            font-size: 56px;
+            margin-bottom: 12px;
+        }
+        .modal h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .modal p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .modal .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .modal .progress-bar .fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #f7931e, #ff5500);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .modal .status-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 16px;
+        }
+        .modal .status-text i {
+            color: #f7931e;
+            margin-right: 8px;
+        }
+        .modal .btn-modal {
+            background: linear-gradient(145deg, #f7931e, #d97a0e);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .modal .btn-modal:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(247, 147, 30, 0.3);
+        }
+        .modal .btn-modal:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .modal .btn-modal.success {
+            background: linear-gradient(145deg, #4caf50, #388e3c);
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(8, 8, 15, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(247, 147, 30, 0.3);
+            border-radius: 14px;
+            padding: 14px 24px;
+            color: #fff;
+            font-size: 14px;
+            z-index: 10000;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+            animation: fadeSlideUp 0.4s ease;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .toast .close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .toast.success {
+            border-color: #4caf50;
+        }
+        .toast.error {
+            border-color: #ff1744;
+        }
+
+        /* ===== ФУТЕР ===== */
+        .footer {
+            background: rgba(8, 8, 15, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            padding: 32px 0 16px;
+            margin-top: 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 24px;
+        }
+        .footer-grid h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .footer-grid a {
+            display: block;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.2);
+            padding: 2px 0;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .footer-grid a:hover {
+            color: #f7931e;
+            transform: translateX(4px);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.08);
+        }
+        .footer-bottom span {
+            color: #f7931e;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 992px) {
+            .download-grid,
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            .header .btn-download {
+                font-size: 12px;
+                padding: 6px 16px;
+            }
+            .nav-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .section-title {
+                font-size: 22px;
+            }
+            .card-wrap {
+                padding: 18px 16px;
+            }
+            .btn-primary {
+                padding: 12px 20px;
+                font-size: 13px;
+            }
+            .btn-secondary {
+                padding: 12px 18px;
+                font-size: 13px;
+            }
+            .modal {
+                padding: 28px 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            .nav-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+            .nav-card {
+                padding: 12px 8px;
+            }
+            .nav-card .title {
+                font-size: 11px;
+            }
+            .nav-card .icon {
+                font-size: 20px;
+            }
+            .logo {
+                font-size: 17px;
+            }
+            .download-card .big-icon {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ХЕДЕР ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-gem"></i>
+                <span>CRYSTAL RUSSIA</span>
+            </div>
+            <nav class="nav">
+                <a href="#download" class="active">Скачать</a>
+                <a href="#about">О нас</a>
+                <a href="#why">Почему мы</a>
+                <a href="#who">Кто мы</a>
+                <a href="#" onclick="window.location.href='index.html'">Форум <span style="font-size:8px;background:#f7931e;padding:1px 8px;border-radius:30px;color:#fff;margin-left:4px;">New</span></a>
+            </nav>
+            <button class="btn-download" onclick="scrollToSection('download')">
+                <i class="fas fa-download"></i> Скачать
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== НАВИГАЦИОННОЕ ОКНО ===== -->
+    <section class="nav-window">
+        <div class="container">
+            <div class="label">⚡ Быстрая навигация</div>
+            <div class="nav-grid">
+                <div class="nav-card anim-up" style="animation-delay:0.05s;" onclick="scrollToSection('download')">
+                    <span class="icon">⬇️</span>
+                    <div class="title">Скачать игру</div>
+                    <div class="desc">Установка за 2 минуты</div>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="nav-card anim-up" style="animation-delay:0.10s;" onclick="scrollToSection('about')">
+                    <span class="icon">🧊</span>
+                    <div class="title">О нашей игре</div>
+                    <div class="desc">Что такое Crystal</div>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="nav-card anim-up" style="animation-delay:0.15s;" onclick="scrollToSection('why')">
+                    <span class="icon">🔥</span>
+                    <div class="title">Зачем играть?</div>
+                    <div class="desc">Почему выбирают нас</div>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="nav-card anim-up" style="animation-delay:0.20s;" onclick="scrollToSection('who')">
+                    <span class="icon">👾</span>
+                    <div class="title">Кто мы такие?</div>
+                    <div class="desc">Наша команда</div>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="nav-card anim-up" style="animation-delay:0.25s;" onclick="window.location.href='index.html'">
+                    <span class="icon">💬</span>
+                    <div class="title">Форум</div>
+                    <div class="desc">Общение с игроками</div>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== РАЗДЕЛ: СКАЧАТЬ ===== -->
+    <section class="section" id="download">
+        <div class="container">
+            <h2 class="section-title anim-up">⬇️ Скачать игру</h2>
+            <p class="section-sub anim-up" style="animation-delay:0.05s;">Погрузись в мир CRYSTAL RUSSIA — скачай лаунчер и начни приключение</p>
+            <div class="card-wrap anim-up" style="animation-delay:0.10s;">
+                <div class="download-grid">
+                    <div class="download-info">
+                        <h3>CRYSTAL RUSSIA</h3>
+                        <p>Уникальный RolePlay проект на базе GTA 5. Тысячи игроков, продуманная экономика, реальные эмоции.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 50+ уникальных модов</li>
+                            <li><i class="fas fa-check-circle"></i> Активное сообщество 24/7</li>
+                            <li><i class="fas fa-check-circle"></i> Постоянные обновления</li>
+                            <li><i class="fas fa-check-circle"></i> Профессиональная поддержка</li>
+                        </ul>
+                        <div class="btn-group">
+                            <button class="btn-primary anim-glow" onclick="downloadGame()">
+                                <i class="fas fa-cloud-download-alt"></i> Скачать (2.8 ГБ)
+                            </button>
+                            <button class="btn-secondary" onclick="scrollToSection('about')">
+                                <i class="fas fa-info-circle"></i> Подробнее
+                            </button>
+                        </div>
+                    </div>
+                    <div class="download-card">
+                        <div class="version">✅ Стабильная версия 2.3.0</div>
+                        <div class="big-icon">🎮</div>
+                        <h3 style="margin-bottom:2px;font-size:20px;">Готово к установке</h3>
+                        <p style="color:rgba(255,255,255,0.25);font-size:13px;">Windows 10 / 11</p>
+                        <div class="meta">📦 2.8 ГБ &nbsp;·&nbsp; 🔄 15.06.2025</div>
+                        <div class="tags">
+                            <span>🟢 128 онлайн</span>
+                            <span>🔥 Топ-1 RP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== РАЗДЕЛ: О НАС ===== -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title anim-up">🧊 О нашей игре</h2>
+            <p class="section-sub anim-up" style="animation-delay:0.05s;">Узнай, что делает CRYSTAL RUSSIA особенным</p>
+            <div class="card-wrap anim-up" style="animation-delay:0.10s;">
+                <div class="grid-2col">
+                    <div class="info-card">
+                        <span class="ic">🌍</span>
+                        <h4>Живой мир</h4>
+                        <p>Огромный открытый мир с детальной экономикой, политикой и социальным взаимодействием. Каждое решение меняет историю.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="ic">🎭</span>
+                        <h4>Глубокий RP</h4>
+                        <p>Система отыгрыша позволяет стать кем угодно: от фермера до мэра. Твоя роль — твоя история.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="ic">⚡</span>
+                        <h4>Постоянный рост</h4>
+                        <p>Мы выпускаем обновления каждую неделю, добавляем контент, улучшаем механику и слушаем игроков.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="ic">🤝</span>
+                        <h4>Сообщество</h4>
+                        <p>Присоединяйся к тысячам игроков, создавай кланы, участвуй в ивентах и находи новых друзей.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== РАЗДЕЛ: ПОЧЕМУ МЫ ===== -->
+    <section class="section" id="why">
+        <div class="container">
+            <h2 class="section-title anim-up">🔥 Почему выбирают нас</h2>
+            <p class="section-sub anim-up" style="animation-delay:0.05s;">Преимущества, которые выделяют наш проект</p>
+            <div class="card-wrap anim-up" style="animation-delay:0.10s;">
+                <div class="grid-3col">
+                    <div class="feature-card">
+                        <span class="ic">👮</span>
+                        <h4>Профессиональная админка</h4>
+                        <p>Команда модераторов 24/7 решает вопросы и следит за порядком</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="ic">🛡️</span>
+                        <h4>Надёжный античит</h4>
+                        <p>Многоуровневая защита от читеров, честная игра для каждого</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="ic">🎯</span>
+                        <h4>Эксклюзивный контент</h4>
+                        <p>50+ уникальных модов, авто, одежда, интерьеры — только у нас</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="ic">📊</span>
+                        <h4>Реалистичная экономика</h4>
+                        <p>Работа, бизнес, недвижимость — всё как в реальной жизни</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="ic">🏆</span>
+                        <h4>Еженедельные ивенты</h4>
+                        <p>Гонки, турниры, конкурсы с крутыми призами каждую неделю</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="ic">💬</span>
+                        <h4>Дружное комьюнити</h4>
+                        <p>Тёплая атмосфера, где легко найти друзей и единомышленников</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== РАЗДЕЛ: КТО МЫ ===== -->
+    <section class="section" id="who">
+        <div class="container">
+            <h2 class="section-title anim-up">👾 Кто мы такие?</h2>
+            <p class="section-sub anim-up" style="animation-delay:0.05s;">Команда энтузиастов, создающая лучший RP-опыт</p>
+            <div class="card-wrap anim-up" style="animation-delay:0.10s;">
+                <p style="text-align:center;color:rgba(255,255,255,0.3);font-size:14px;margin-bottom:24px;max-width:640px;margin-left:auto;margin-right:auto;">
+                    Мы — разработчики, дизайнеры и модераторы, которые вложили душу в CRYSTAL RUSSIA. Наша цель — дать игрокам уникальный мир для жизни.
+                </p>
+                <div class="grid-3col">
+                    <div class="team-card">
+                        <div class="avatar">👑</div>
+                        <div class="name">Admin</div>
+                        <div class="role">Главный администратор</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar">💻</div>
+                        <div class="name">Artyom_Orlov</div>
+                        <div class="role">Ведущий разработчик</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar">🎨</div>
+                        <div class="name">Designer</div>
+                        <div class="role">Главный дизайнер</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar">🔧</div>
+                        <div class="name">Modder</div>
+                        <div class="role">Модератор контента</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar">🛡️</div>
+                        <div class="name">Helper</div>
+                        <div class="role">Техподдержка</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar">📢</div>
+                        <div class="name">SMM-менеджер</div>
+                        <div class="role">PR и соцсети</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ЗАГРУЗКИ ===== -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="modal">
+            <div class="icon-big">📦</div>
+            <h2>Подготовка к скачиванию</h2>
+            <p>Идёт подготовка файла к загрузке. Пожалуйста, подождите...</p>
+            <div class="progress-bar">
+                <div class="fill" id="progressFill"></div>
+            </div>
+            <div class="status-text" id="statusText">
+                <i class="fas fa-spinner fa-spin"></i> Подключение к хранилищу...
+            </div>
+            <button class="btn-modal" id="modalBtn" disabled>
+                <i class="fas fa-spinner fa-spin"></i> Подготовка...
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>❄️ CRYSTAL RUSSIA</h4>
+                    <a onclick="scrollToSection('download')">Скачать игру</a>
+                    <a onclick="scrollToSection('about')">О нас</a>
+                    <a onclick="scrollToSection('who')">Кто мы</a>
+                    <a onclick="window.location.href='index.html'">Форум</a>
+                </div>
+                <div>
+                    <h4>📌 Разделы</h4>
+                    <a onclick="scrollToSection('download')">Скачать</a>
+                    <a onclick="scrollToSection('about')">О проекте</a>
+                    <a onclick="scrollToSection('why')">Преимущества</a>
+                    <a onclick="scrollToSection('who')">Команда</a>
+                </div>
+                <div>
+                    <h4>📱 Соцсети</h4>
+                    <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="#"><i class="fab fa-discord"></i> Discord</a>
+                    <a href="#"><i class="fab fa-vk"></i> ВКонтакте</a>
+                    <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                </div>
+                <div>
+                    <h4>🛠 Поддержка</h4>
+                    <a href="#">Техподдержка</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Баг-репорты</a>
+                    <a href="#">Пожертвовать</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                Copyright © 2025 <span>CRYSTAL RUSSIA</span> — Все права защищены
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== СКРИПТЫ ===== -->
+    <script>
+        // ===== ПЛАВНАЯ ПРОКРУТКА =====
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const offset = 80;
+            const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+            document.querySelectorAll('.nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + id) link.classList.add('active');
+            });
+        }
+
+        // ===== АКТИВНЫЙ ПУНКТ ПРИ СКРОЛЛЕ =====
+        document.addEventListener('scroll', () => {
+            const ids = ['download', 'about', 'why', 'who'];
+            let current = '';
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.getBoundingClientRect().top <= 150) current = id;
+            });
+            document.querySelectorAll('.nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+
+        // ===== TOAST-УВЕДОМЛЕНИЕ =====
+        function showToast(msg, type = '') {
+            const old = document.querySelector('.toast');
+            if (old) old.remove();
+            const t = document.createElement('div');
+            t.className = `toast ${type}`;
+            t.innerHTML = `
+                    <span style="font-size:22px;">${type === 'success' ? '✅' : '📦'}</span>
+                    <span>${msg}</span>
+                    <button class="close" onclick="this.parentElement.remove()">✕</button>
+                `;
+            document.body.appendChild(t);
+            setTimeout(() => {
+                if (t.parentElement) {
+                    t.style.opacity = '0';
+                    t.style.transition = 'opacity 0.4s';
+                    setTimeout(() => t.remove(), 400);
+                }
+            }, 6000);
+        }
+
+        // ===== ОСНОВНАЯ ФУНКЦИЯ СКАЧИВАНИЯ =====
+        function downloadGame() {
+            const modal = document.getElementById('downloadModal');
+            const progress = document.getElementById('progressFill');
+            const statusText = document.getElementById('statusText');
+            const btn = document.getElementById('modalBtn');
+
+            // Показываем модальное окно
+            modal.classList.add('active');
+            progress.style.width = '0%';
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Подготовка...';
+            statusText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Подключение к хранилищу...';
+
+            // ID вашего файла на Google Диске
+            const fileId = '10whwpfVDh_DRkKEa8bODUJ_84ipoQn8T';
+            const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+
+            // Имитация прогресса
+            let progressValue = 0;
+            const interval = setInterval(() => {
+                progressValue += Math.floor(Math.random() * 12) + 3;
+                if (progressValue > 95) {
+                    progressValue = 95;
+                    clearInterval(interval);
+                }
+                progress.style.width = progressValue + '%';
+
+                // Меняем статусные сообщения
+                if (progressValue > 30 && progressValue < 60) {
+                    statusText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Подготовка файла к загрузке...';
+                } else if (progressValue > 60) {
+                    statusText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Почти готово...';
+                }
+            }, 250);
+
+            // Основной процесс
+            setTimeout(() => {
+                clearInterval(interval);
+                progress.style.width = '100%';
+                statusText.innerHTML = '<i class="fas fa-check-circle" style="color:#4caf50;"></i> Файл готов к скачиванию!';
+
+                // Создаём ссылку для скачивания
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = 'Crystal_Russia_Launcher_v2.3.0.exe';
+                document.body.appendChild(link);
+
+                // Запускаем скачивание
+                try {
+                    link.click();
+                    document.body.removeChild(link);
+
+                    btn.disabled = false;
+                    btn.className = 'btn-modal success';
+                    btn.innerHTML = '<i class="fas fa-check-circle"></i> Скачивание началось!';
+
+                    showToast('✅ Скачивание началось! Файл сохраняется в папку "Загрузки".', 'success');
+
+                    // Закрываем модалку через 2 секунды
+                    setTimeout(() => {
+                        modal.classList.remove('active');
+                        // Возвращаем кнопке исходный вид для следующего раза
+                        btn.className = 'btn-modal';
+                        btn.innerHTML = '<i class="fas fa-download"></i> Скачать';
+                    }, 2500);
+
+                } catch (e) {
+                    // Если не удалось скачать автоматически
+                    btn.disabled = false;
+                    btn.className = 'btn-modal';
+                    btn.innerHTML = '<i class="fas fa-external-link-alt"></i> Открыть страницу загрузки';
+
+                    btn.onclick = function() {
+                        window.open(downloadUrl, '_blank');
+                        showToast('📦 Страница загрузки открыта в новой вкладке');
+                        modal.classList.remove('active');
+                    };
+
+                    showToast('⚠️ Автоматическое скачивание не удалось. Нажмите на кнопку в окне.', 'error');
+                }
+
+            }, 3500);
+        }
+
+        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ПО КЛИКУ ВНЕ =====
+        document.getElementById('downloadModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                const btn = document.getElementById('modalBtn');
+                if (!btn.disabled) {
+                    this.classList.remove('active');
+                }
+            }
+        });
+
+        // ===== URL-ЯКОРЬ ПРИ ЗАГРУЗКЕ =====
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.hash) {
+                const id = window.location.hash.replace('#', '');
+                setTimeout(() => scrollToSection(id), 300);
+            }
+        });
+    </script>
+</body>
+</html>
